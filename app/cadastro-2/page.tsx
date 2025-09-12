@@ -3,23 +3,32 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-export default function LoginPage() {
+export default function CadastroPage() {
   const router = useRouter();
+  const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
-  function handleLogin(e: React.FormEvent) {
+  function handleCadastro(e: React.FormEvent) {
     e.preventDefault();
-    const nome = email.split("@")[0] || "Usuário";
+    // Simulação de cadastro: salva e já "loga"
     localStorage.setItem("user", JSON.stringify({ nome, email, senha }));
-    router.push("/"); // volta pra home
+    router.push("/app/perfil"); // volta para o perfil
   }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-96">
-        <h1 className="text-2xl font-bold mb-6 text-center text-black">Login</h1>
-        <form className="space-y-4" onSubmit={handleLogin}>
+        <h1 className="text-2xl font-bold mb-6 text-center text-black">Cadastro</h1>
+
+        <form className="space-y-4" onSubmit={handleCadastro}>
+          <input
+            type="text"
+            placeholder="Nome completo"
+            value={nome}
+            onChange={e => setNome(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded text-black placeholder-black"
+          />
           <input
             type="email"
             placeholder="E-mail"
@@ -38,13 +47,14 @@ export default function LoginPage() {
             type="submit"
             className="w-full bg-black text-white p-2 rounded hover:bg-gray-800"
           >
-            Entrar
+            Criar conta
           </button>
         </form>
+
         <p className="text-center text-sm mt-4 text-black">
-          Não tem conta?{" "}
-          <Link href="/cadastro" className="text-blue-500 hover:underline">
-            Cadastre-se
+          Já tem conta?{" "}
+          <Link href="/login" className="text-blue-500 hover:underline">
+            Faça login
           </Link>
         </p>
       </div>
