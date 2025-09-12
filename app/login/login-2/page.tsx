@@ -10,6 +10,7 @@ export default function LoginPage() {
 
   function handleLogin(e: React.FormEvent) {
     e.preventDefault();
+    // Simulação: considera login OK e salva no localStorage
     const nome = email.split("@")[0] || "Usuário";
     localStorage.setItem("user", JSON.stringify({ nome, email, senha }));
     router.push("/"); // volta pra home
@@ -19,6 +20,7 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-96">
         <h1 className="text-2xl font-bold mb-6 text-center text-black">Login</h1>
+
         <form className="space-y-4" onSubmit={handleLogin}>
           <input
             type="email"
@@ -41,6 +43,7 @@ export default function LoginPage() {
             Entrar
           </button>
         </form>
+
         <p className="text-center text-sm mt-4 text-black">
           Não tem conta?{" "}
           <Link href="/cadastro" className="text-blue-500 hover:underline">
